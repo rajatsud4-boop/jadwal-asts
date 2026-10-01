@@ -67,32 +67,33 @@ nav button.on{color:var(--pri);font-weight:700}nav button.ed.on{color:var(--warn
 <header><small>SMK YADIKA Bangil</small><h1>Jadwal & Akumulasi Jaga ASTS</h1><p>Ganjil 2026/2027 · 5–9 Oktober 2026</p></header>
 <div class="bar"><div class="days" id="days"></div><div class="search"><input id="q" placeholder="🔍 Cari nama / kode guru" inputmode="search"></div><div class="ch" id="ch"></div></div>
 <main id="m"></main>
-<nav><button id="nj" onclick="vw='r';draw()"><i>🏫</i>Jadwal</button><button id="na" onclick="vw='a';draw()"><i>📊</i>Akumulasi</button><button class="ed" id="ne" onclick="tg()"><i>✏️</i>Edit</button><button onclick="gate(bk)"><i>💾</i>Cadangan</button></nav>
-<div class="ov" id="pw" hidden><div class="sh"><h3>🔒 Masukkan Password</h3><p>Password diperlukan untuk mengubah jadwal atau memuat/mereset data.</p>
+<nav><button id="nj" onclick="vw='r';draw()"><i>🏫</i>Jadwal</button><button id="na" onclick="vw='a';draw()"><i>📊</i>Akumulasi</button><button class="ed" id="ne" onclick="tg()"><i>✏️</i>Edit</button><button onclick="rq()"><i>🔄</i>Reset</button></nav>
+<div class="ov" id="pw" hidden><div class="sh"><h3>🔒 Masukkan Password</h3><p>Password diperlukan untuk membuka menu Edit dan Reset.</p>
 <label>Password</label><input id="pi" type="password" autocomplete="off" placeholder="Password" onkeydown="if(event.key=='Enter')pk()"><p id="pe" style="color:var(--warn);margin-top:6px"></p>
 <div class="acts"><button onclick="$('pw').hidden=true">Batal</button><button class="p" onclick="pk()">Masuk</button></div></div></div>
+<div class="ov" id="rc" hidden><div class="sh"><h3>🔄 Reset Jadwal</h3><p>Semua perubahan yang pernah disimpan akan dihapus dan jadwal kembali ke data awal. Lanjutkan?</p><div class="acts"><button onclick="$('rc').hidden=true">Batal</button><button class="p" style="background:var(--warn)" onclick="dr()">Ya, reset</button></div></div></div>
 <div class="ov" id="e" hidden><div class="sh"><h3>Ubah / tambah jaga</h3><p>Pilih hari, sesi, ruang, lalu pengawasnya. Nama guru juga bisa dikoreksi.</p>
 <label>Hari</label><select id="eh" onchange="fs()"></select><label>Sesi</label><select id="es" onchange="fp()"></select><label>Ruang</label><select id="er" onchange="fp()"></select>
 <label>Pengawas</label><select id="ep" onchange="$('en').value=N[this.value]||''"></select><label>Nama guru</label><input id="en" placeholder="Nama guru">
 <div class="acts"><button onclick="$('e').hidden=true">Batal</button><button class="p" onclick="sv()">Simpan</button></div></div></div>
-<div class="ov" id="o" hidden><div class="sh"><h3>Cadangan & Reset</h3><p>Perubahan tersimpan di browser ini. Salin data untuk dipindah ke perangkat lain, lalu tempel dan tekan Muat.</p>
+<div class="ov" id="o" hidden><div class="sh"><h3>Cadangan & Reset</h3><p>Salin data untuk dipindah ke perangkat lain, lalu tempel dan tekan Muat.</p>
 <label>Data jadwal</label><textarea id="tx"></textarea><p id="ms" style="margin-top:6px"></p>
-<div class="acts"><button onclick="cp()">Salin</button><button class="p" onclick="ld()">Muat</button><button id="rs" onclick="rst()">Reset ke jadwal awal</button><button onclick="$('o').hidden=true">Tutup</button></div></div></div>
+<div class="acts"><button onclick="cp()">Salin</button><button class="p" onclick="ld()">Muat</button><button onclick="$('o').hidden=true">Tutup</button></div></div></div>
 <script>
 const N={1:"Edy Suryanto, S.Pd.I., Gr.",2:"Abdul Makin, S.Kom., M.M.",3:"Drs. Eko Setyo Widanto, M.Pd.",4:"Robbianto, S.Kom.",6:"Mohammad Arifin, S.Kom.",7:"Dra. Luthfiyati",8:"M. Munawir, M.Pd.",9:"Nurul Millah, M.Pd.",10:"Ijmaliyah, M.HI.",11:"Indro Setianto, S.H., S.Kom.",12:"Verawati Puji Rahayu, S.Pd.",13:"Denny Lia Firdyana, S.Pd, Gr",14:"Hermin Sulistyowati, S.Si",15:"Fitra Rahim, S.Pd, Gr",16:"Munjiatul Khusnah, S.Pd, Gr",17:"Mochammad Said, M.Pd.",18:"Ayu Rizky, S.Pd.",19:"Khusnul Khotimah, S.Pd, Gr",20:"Wildan Mualim, M.Kom.",21:"Dhurrotul Faizah, Amd.Kep.",22:"Shodikul Amri, S.Kom.",23:"Muhammad Khifni, S.Kom.",24:"Ayu Pratiwi, S.Pd.",25:"M. Ircham Zanuarsyah, S.Pd, Gr",26:"Miftakhul Maslikha, S.Pd.I",27:"Mochammad Fajar Zakariyah, S.E.",28:"Akhmat Zakariyah, S.Pd, Gr",29:"Ustadz Salis",30:"Lucky Andriyantoko, M.Pd.",31:"Khamdan Suriyok, SE., M.SA",32:"Muhammad Guntur Wicaksono, S.Kom.",33:"Sudrajat, S.Kom.",34:"Dita Oktavia Efendi, S.Pd.",35:"Biby Widhi Rahadi, S.Sos.",36:"Sabrina Khoirun Nisha, S.Ak",37:"Muchamad Rizal Azhari, S.Psi.",38:"Muhammad Lutfiyanto, S.Kom.",39:"Muhammad Bayu Sujadmiko, S.Tr.Anim.",40:"Zulfika Rochmah, S.H.",41:"M. Afif Priyanto, S.kom.",42:"R. Faza Ghulam, S.Kom",43:"Teter Sutejo, S.Kom.",45:"M. Fachreza SP, SE",46:"M. Faizal H, S.Pd",47:"Elda Rizki Agustin, S.Tr, Gr",48:"Febri Romadhoni Isfani, S.Keb"};
 const D=[
-{d:"Senin",t:5,S:[["Sesi I & II","07.00–09.30",[39,12,9,29,19,40,23,16,38,31,47,21,24,18,15,34,30,17,6,46]],["Sesi III","10.00–11.15",[46,39,12,9,29,19,40,23,16,38,31,47,21,24,18,15,34,30,17,6]]]},
+{d:"Senin",t:5,S:[["Sesi I & II","07.00–09.30",[39,12,9,29,19,40,23,16,38,31,47,21,24,18,48,34,30,17,6,46]],["Sesi III","10.00–11.15",[46,39,12,9,29,19,40,23,16,38,31,47,21,24,18,48,34,30,17,6]]]},
 {d:"Selasa",t:6,S:[["Sesi I & II","07.00–09.30",[13,22,37,27,7,36,47,26,42,20,43,10,6,25,8,41,15,34,35,21]],["Sesi III","10.00–11.15",[21,13,22,37,27,7,36,47,26,42,20,43,10,6,25,8,41,15,34,35]]]},
 {d:"Rabu",t:7,S:[["Sesi I & II","07.00–09.30",[29,6,8,23,12,19,27,13,7,40,25,10,30,24,31,18,9,46,15,11]],["Sesi III","10.00–11.15",[11,29,6,8,23,12,19,27,13,7,40,25,10,30,24,31,18,9,46,15]],["Sesi IV","11.15–12.30",[0,0,0,0,0,0,0,0,0,0,0,0,19,0,0,31,0,0,0,0]]]},
 {d:"Kamis",t:8,S:[["Sesi I & II","07.00–09.30",[16,35,37,38,39,41,18,31,12,13,7,9,20,15,17,45,25,27,21,26]],["Sesi III","10.00–11.15",[26,16,35,37,38,39,41,18,31,12,13,7,9,20,15,17,45,25,27,21]],["Sesi IV","11.15–12.30",[26,16,35,37,38,39,41,18,0,0,13,7,9,0,15,17,0,0,0,21]]]},
-{d:"Jumat",t:9,S:[["Sesi I","07.00–08.15",[40,23,19,43,11,29,12,47,35,42,36,6,24,22,46,34,14,22,30,17]],["Sesi II","08.45–10.00",[17,40,23,19,43,11,29,12,47,35,42,36,6,24,22,46,34,14,22,30]]]}
+{d:"Jumat",t:9,S:[["Sesi I","07.00–08.15",[40,23,19,43,11,29,48,47,35,42,36,6,24,22,46,34,14,22,30,17]],["Sesi II","08.45–10.00",[17,40,23,19,43,11,29,48,47,35,42,36,6,24,22,46,34,14,22,30]]]}
 ];
-const $=id=>document.getElementById(id),KEY="asts_all",D0=JSON.stringify([D,N]);
+const $=id=>document.getElementById(id),KEY="asts_v3",D0=JSON.stringify([D,N]);
 const nw=new Date(),td=(nw.getFullYear()==2026&&nw.getMonth()==9)?nw.getDate():0;
 let di=Math.max(0,D.findIndex(x=>x.t==td)),si=0,vw="r",ed=false,sk="n",fl="a",tsv="";
 const PH="4adb6830d0691e53b007597a872e3facc181c78091da91b177c7023e726c208c";let pf=null,bad=0,lk=0;
 async function sha(t){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(t));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
-function gate(f){if(ed){f();return}pf=f;$("pi").value="";$("pe").textContent="";$("pw").hidden=false;setTimeout(()=>$("pi").focus(),50)}
+function gate(f,force){if(ed&&!force){f();return}pf=f;$("pi").value="";$("pe").textContent="";$("pw").hidden=false;setTimeout(()=>$("pi").focus(),50)}
 function tg(){if(ed){ed=false;draw()}else gate(()=>{ed=true;draw()})}
 async function pk(){if(Date.now()<lk){$("pe").textContent="Terlalu banyak percobaan. Coba lagi sebentar lagi.";return}
  let ok=false;try{ok=(await sha($("pi").value))===PH}catch(e){}
@@ -108,10 +109,11 @@ $("ep").innerHTML='<option value="0">— Kosong (tidak ada ujian) —</option>'+
 function fs(s){const d=+$("eh").value;$("es").innerHTML=D[d].S.map((z,i)=>`<option value="${i}">${z[0]} (${z[1]})</option>`).join("");$("es").value=s||0;fp()}
 function fp(){const c=D[+$("eh").value].S[+$("es").value||0][2][+$("er").value||0];$("ep").value=c;$("en").value=c?N[c]:""}
 function sv(){const c=+$("ep").value;D[+$("eh").value].S[+$("es").value][2][+$("er").value]=c;const n=$("en").value.trim();if(c&&n)N[c]=n;save();$("e").hidden=true;draw()}
-function bk(){$("tx").value=JSON.stringify([D,N]);$("ms").textContent="";$("rs").textContent="Reset ke jadwal awal";$("o").hidden=false}
+function bk(){$("tx").value=JSON.stringify([D,N]);$("ms").textContent="";$("o").hidden=false}
 function cp(){$("tx").select();try{navigator.clipboard.writeText($("tx").value);$("ms").textContent="Tersalin."}catch(e){$("ms").textContent="Teks dipilih, salin manual."}}
 function ld(){try{apply(JSON.parse($("tx").value));save();draw();$("ms").textContent="Jadwal berhasil dimuat."}catch(e){$("ms").textContent="Data tidak valid."}}
-function rst(){const b=$("rs");if(b.textContent.startsWith("Reset")){b.textContent="Ketuk lagi untuk konfirmasi";return}apply(JSON.parse(D0));try{localStorage.removeItem(KEY)}catch(e){}draw();$("o").hidden=true}
+function rq(){gate(()=>{$("rc").hidden=false},true)}
+function dr(){apply(JSON.parse(D0));try{localStorage.removeItem(KEY)}catch(e){}$("rc").hidden=true;ed=false;draw()}
 function cpy(){try{navigator.clipboard.writeText(tsv)}catch(e){const t=document.createElement("textarea");t.value=tsv;document.body.appendChild(t);t.select();document.execCommand("copy");t.remove()}alert("Tabel disalin. Tempel ke Word atau Excel.")}
 function calc(){const T={};for(const k in N)T[k]={c:+k,days:{},n:0,rooms:new Set(),dup:false};
  D.forEach((x,di)=>x.S.forEach((s,si)=>{const sl=s[0]=="Sesi I & II"?[["Sesi I","07.00–08.15"],["Sesi II","08.15–09.30"]]:[[s[0],s[1]]];
@@ -124,8 +126,8 @@ function draw(){
  $("days").style.display=J?"flex":"none";
  $("days").innerHTML=D.map((x,i)=>`<button class="d ${i==di?'on':''} ${x.t==td?'today':''}" onclick="di=${i};si=0;draw()"><b>${x.d}</b><span>${x.t}</span></button>`).join("");
  $("nj").className=J?"on":"";$("na").className=J?"":"on";$("ne").className="ed"+(ed?" on":"");
- let h=ed?'<div class="banner">✏️ Mode edit aktif. Ketuk kartu/baris ruang untuk mengganti pengawas, atau tombol "＋ Ubah jaga".</div>':"";
- const eb=ed?ck(0,"openE(di,0,0)")+"＋ Ubah jaga</button>":"";
+ let h=ed?'<div class="banner">✏️ Mode edit aktif. Ketuk kartu/baris ruang untuk mengganti pengawas. Perubahan tersimpan otomatis dan tidak akan berubah lagi kecuali di-Reset.</div>':"";
+ const eb=ed?ck(0,"openE(di,0,0)")+"＋ Ubah jaga</button>"+ck(0,"bk()")+"💾 Cadangan</button>":"";
  if(J){
   $("ch").innerHTML=ck(vw=="r","vw='r';draw()")+"🏫 Per Ruang</button>"+ck(vw=="g","vw='g';draw()")+"👤 Per Guru</button>"+eb;
   if(vw=="r"){
